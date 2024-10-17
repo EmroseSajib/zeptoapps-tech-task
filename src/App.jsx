@@ -1,27 +1,19 @@
-import { useEffect } from "react";
-import "./App.css";
-import useAxios from "./common/UseAxios";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import HomeScreen from "./pages/HomeScreen";
+import NotFoundScreen from "./pages/NotFoundScreen";
+import WishListScreen from "./pages/WishListScreen";
 
 function App() {
-  const getBooksList = useAxios([]);
-  const handleBookList = () => {
-    getBooksList.fetcher({
-      options: {
-        method: "GET",
-        url: `/books`,
-      },
-      callback: () => {},
-    });
-  };
-  useEffect(() => {
-    handleBookList();
-  }, []);
   return (
-    <>
+    <Router>
       <Navbar />
-      <h2>hello world</h2>
-    </>
+      <Routes>
+        <Route path="/" element={<HomeScreen />} />
+        <Route path="/wish-list" element={<WishListScreen />} />
+        <Route path="*" element={<NotFoundScreen />} />
+      </Routes>
+    </Router>
   );
 }
 

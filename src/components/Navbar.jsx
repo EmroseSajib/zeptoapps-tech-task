@@ -1,98 +1,94 @@
+import { NavLink } from "react-router-dom";
 import logo from "../../public/assets/Zepto-logo.avif";
 
+import { useState } from "react";
+import { navMenu } from "../common/StoreData";
+
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <div>
-      <nav className="bg-gray-800">
-        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-          <div className="relative flex h-16 items-center justify-between">
-            <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-              <button
-                type="button"
-                className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                aria-controls="mobile-menu"
-                aria-expanded="false"
-              >
-                <span className="absolute -inset-0.5"></span>
-                <span className="sr-only">Open main menu</span>
+    <header className="shadow-md font-sans tracking-wide top-0 z-50 sticky">
+      <div className="flex flex-wrap items-center justify-between gap-4 px-10 py-4 bg-slate-800 min-h-[70px]">
+        {/* Logo */}
+        <NavLink to="/">
+          <img src={logo} alt="logo" className="w-36" />
+        </NavLink>
 
-                <svg
-                  className="block h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                  data-slot="icon"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                  />
-                </svg>
+        {/* Navigation Menu */}
+        <div
+          id="collapseMenu"
+          className={`${
+            isMenuOpen ? "block" : "max-lg:hidden"
+          } lg:block max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50`}
+        >
+          {/* Close button for mobile */}
+          <button
+            id="toggleClose"
+            onClick={toggleMenu}
+            className="lg:hidden fixed top-2 right-4 z-[100] rounded-full bg-white p-3"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-4 fill-black"
+              viewBox="0 0 320.591 320.591"
+            >
+              <path d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"></path>
+              <path d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"></path>
+            </svg>
+          </button>
 
-                <svg
-                  className="hidden h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                  data-slot="icon"
+          {/* Menu items */}
+          <ul className="lg:flex lg:gap-x-5 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50">
+            <li className="mb-6 hidden max-lg:block">
+              <NavLink to="/">
+                <img src={logo} alt="logo" className="w-36" />
+              </NavLink>
+            </li>
+
+            {/* Apply active class or style to selected links */}
+            {navMenu?.map((item, index) => (
+              <li key={index} className="max-lg:border-b max-lg:py-3 px-3">
+                <NavLink
+                  onClick={toggleMenu}
+                  to={item?.path}
+                  className={
+                    ({ isActive }) =>
+                      isActive
+                        ? "text-blue-500 block font-bold text-[15px]" // Active link styling
+                        : "hover:text-blue-500 text-[15px] lg:text-gray-300 text-slate-600 font-bold" // Non-active link styling
+                  }
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18 18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-              <div className="flex flex-shrink-0 items-center">
-                <img className="h-8 w-auto" src={logo} alt="Your Company" />
-              </div>
-              <div className="hidden sm:ml-6 sm:block">
-                <div className="flex space-x-4">
-                  <a
-                    href="#"
-                    className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
-                    aria-current="page"
-                  >
-                    Home
-                  </a>
-                  <a
-                    href="#"
-                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                  >
-                    Wishlist
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+                  {item?.screenName}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <div className="sm:hidden" id="mobile-menu">
-          <div className="space-y-1 px-2 pb-3 pt-2">
-            <a
-              href="#"
-              className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
-              aria-current="page"
+        {/* Menu toggle for mobile */}
+        <div className="flex max-lg:ml-auto">
+          <button id="toggleOpen" onClick={toggleMenu} className="lg:hidden">
+            <svg
+              className="w-7 h-7"
+              fill="#ffff"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              Home
-            </a>
-            <a
-              href="#"
-              className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-            >
-              Wishlist
-            </a>
-          </div>
+              <path
+                fillRule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+          </button>
         </div>
-      </nav>
-    </div>
+      </div>
+    </header>
   );
 };
 
