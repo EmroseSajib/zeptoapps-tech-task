@@ -1,9 +1,12 @@
+import React from "react";
+
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import ReactPaginate from "react-paginate";
 
 const Paginate = ({ pageable = {}, handlePageClick = () => {} }) => {
+  console.log("pageable", pageable);
   return (
-    <div className="flex flex-col lg:flex-row justify-between items-center pt-5 ">
+    <div className="flex  justify-between items-center pt-5 ">
       {pageable?.totalPages && (
         <div className="">
           <ReactPaginate
@@ -29,15 +32,15 @@ const Paginate = ({ pageable = {}, handlePageClick = () => {} }) => {
               ) : null
             }
             onPageChange={handlePageClick}
-            pageRangeDisplayed={2}
+            pageRangeDisplayed={3}
             pageCount={pageable?.totalPages}
-            // renderOnZeroPageCount={null}
+            renderOnZeroPageCount={null}
             breakClassName="item break-me "
             containerClassName="flex items-center justify-center space-x-2 font-[600] text-gray-700"
             disabledClassName="disabled-page"
             marginPagesDisplayed="2"
             nextClassName="item next "
-            activeClassName="bg-light-blue-300 text-[#2a6df5] hover:text-[#ffff] p-2"
+            activeClassName="bg-light-blue-300 text-[#ffff] hover:text-[#ffff] p-2"
             pageClassName="block  hover:bg-light-blue-300 hover:text-[#ffff] w-8 h-8 flex items-center justify-center rounded p-2"
             previousClassName="item previous"
             forcePage={pageable?.number}
