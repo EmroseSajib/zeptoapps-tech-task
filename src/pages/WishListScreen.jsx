@@ -25,7 +25,7 @@ const WishListScreen = () => {
   }, []);
 
   return (
-    <div className="p-10">
+    <div className="lg:p-10 p-5">
       {getWishList?.length > 0 ? (
         <div className="lg:grid grid-cols-6 gap-2">
           {getWishList?.map((item, index) => (

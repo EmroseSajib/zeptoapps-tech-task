@@ -57,14 +57,12 @@ const CardDesign = ({
             <button
               type="button"
               onClick={() => handleBookDetails(item?.id)}
-              className="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 rounded-lg text-sm px-2 py-[1px] font-semibold text-center me-2 mb-2"
+              className="customBtn"
             >
               Details
             </button>
           </div>
-          <h3 className="text-base text-gray-800 font-bold flex-1 truncate whitespace-nowrap overflow-hidden text-ellipsis">
-            {item?.title}
-          </h3>
+          <h3 className="customTitle">{item?.title}</h3>
           {item?.authors?.map((author, authorIndex) => (
             <p key={authorIndex} className="text-[14px] text-slate-500 flex-1">
               {author?.name}

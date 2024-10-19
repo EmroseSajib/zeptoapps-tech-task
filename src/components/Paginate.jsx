@@ -3,7 +3,7 @@ import ReactPaginate from "react-paginate";
 
 const Paginate = ({ pageable = {}, handlePageClick = () => {} }) => {
   return (
-    <div className="flex  justify-between items-center py-3 ">
+    <div className="lg:flex  justify-between items-center py-3 ">
       {pageable?.totalPages && (
         <div className="">
           <ReactPaginate
@@ -47,7 +47,7 @@ const Paginate = ({ pageable = {}, handlePageClick = () => {} }) => {
 
       {/*  */}
       {pageable?.totalPages && (
-        <div className="">
+        <div className="flex lg:block justify-center">
           <p className="text-sm text-gray-700 font-[600]">
             showing{" "}
             <span className="font-[500] text-light-blue-300">

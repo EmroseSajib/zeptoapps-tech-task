@@ -122,7 +122,7 @@ const HomeScreen = () => {
 
   return (
     <div>
-      <div className="flex flex-col lg:flex-row  justify-between items-center lg:gap-10 gap-2 px-10 py-4 border-b-2">
+      <div className="flex flex-col lg:flex-row  justify-between items-center lg:gap-10 gap-2 lg:px-10 px-5 py-4 border-b-2">
         <InputField
           inputRef={searchRef}
           placeholder="Search by title"
@@ -146,7 +146,7 @@ const HomeScreen = () => {
             getBooksList?.data?.results?.length > 0 || getBooksList?.loading
               ? "lg:grid md:grid"
               : ""
-          }  lg:grid-cols-6 md:grid-cols-4 gap-3 py-5 px-10`}
+          }  lg:grid-cols-6 md:grid-cols-4 gap-3 py-5 lg:px-10 px-5`}
         >
           {getBooksList?.loading ? (
             Array(32)
@@ -171,7 +171,7 @@ const HomeScreen = () => {
           )}
         </div>
         {getBooksList?.data?.results?.length > 0 ? (
-          <div className="mx-10 items-center justify-between border-t border-blue-gray-50  bg-gray-400 px-5 rounded-lg my-5">
+          <div className="lg:mx-10 mx-5 items-center justify-between border-t border-blue-gray-50  bg-gray-400 px-5 rounded-lg my-5">
             <Paginate
               pageable={{
                 totalElements: getBooksList?.data?.count,
