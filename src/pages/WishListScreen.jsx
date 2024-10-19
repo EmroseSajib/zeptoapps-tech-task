@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import successMessage from "../common/SuccessMessage";
 import WarningMessage from "../common/WarningMessage";
 import CardDesign from "../components/CardDesign";
 
 const WishListScreen = () => {
   const [getWishList, setWishList] = useState([]);
+  const navigate = useNavigate();
+  const handleBookDetails = (bookId) => {
+    navigate(`/book-details/${bookId}`);
+  };
 
+  const handleWishlistClick = (book) => {
+    const updatedBooks = getWishList?.filter((item) => item?.id !== book?.id);
+    setWishList(updatedBooks);
+    localStorage.setItem("wishlist", JSON.stringify(updatedBooks));
+    successMessage("Book remove from wishlist!");
+  };
   useEffect(() => {
     const storedBooks = localStorage.getItem("wishlist");
     const parsedBooks = storedBooks ? JSON.parse(storedBooks) : [];
     setWishList(parsedBooks);
   }, []);
-
-  const handleWishlistClick = (book) => {
-    const updatedBooks = getWishList?.filter((item) => item?.id !== book?.id);
-    setWishList(updatedBooks);
-    localStorage.setItem("wishlist", JSON.stringify(updatedBooks)); // Update localStorage
-    successMessage("Book remove from wishlist!");
-  };
 
   return (
     <div className="p-10">
@@ -28,6 +32,7 @@ const WishListScreen = () => {
               key={index}
               item={item}
               handleWishlistClick={handleWishlistClick}
+              handleBookDetails={handleBookDetails}
             />
           ))}
         </div>

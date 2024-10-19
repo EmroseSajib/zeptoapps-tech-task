@@ -2,7 +2,12 @@ import { FaHeart, FaIdCard } from "react-icons/fa";
 import { IoMdHeartEmpty } from "react-icons/io";
 import demoImage from "../../public/assets/demoCover.png";
 
-const CardDesign = ({ item = {}, handleWishlistClick, fillColour = "red" }) => {
+const CardDesign = ({
+  item = {},
+  handleBookDetails,
+  handleWishlistClick,
+  fillColour = "red",
+}) => {
   const browsingData = (data = []) => {
     return data
       ?.filter((item) => item?.startsWith("Browsing:"))
@@ -48,6 +53,15 @@ const CardDesign = ({ item = {}, handleWishlistClick, fillColour = "red" }) => {
         </div>
 
         <div className="px-6">
+          <div className="flex  items-center justify-end ">
+            <button
+              type="button"
+              onClick={() => handleBookDetails(item?.id)}
+              className="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-1 text-center me-2 mb-2"
+            >
+              Details
+            </button>
+          </div>
           <h3 className="text-base text-gray-800 font-bold flex-1 truncate whitespace-nowrap overflow-hidden text-ellipsis">
             {item?.title}
           </h3>

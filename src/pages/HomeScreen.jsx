@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CardSkeleton from "../common/CardSkeleton";
 import ErrorValidate from "../common/ErrorValidate";
 import Paginate from "../common/Paginate";
@@ -10,14 +11,19 @@ import CardDesign from "../components/CardDesign";
 import InputField from "../components/InputField";
 import SelectField from "../components/SelectField";
 const HomeScreen = () => {
+  const [debounceTimeout, setDebounceTimeout] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [wishlist, setWishlist] = useState([]);
+  const getBooksList = useAxios([]);
   const searchRef = useRef(null);
   const selectRef = useRef(null);
-  const getBooksList = useAxios([]);
+  const navigate = useNavigate();
+
   const selectTopic = localStorage.getItem("selectTopic");
   const searchTitle = localStorage.getItem("searchTitle");
-
+  const handleBookDetails = (bookId) => {
+    navigate(`/book-details/${bookId}`);
+  };
   const handlePagination = (pageNumber) => {
     setCurrentPage(pageNumber?.selected);
     if (selectTopic) {
@@ -60,9 +66,14 @@ const HomeScreen = () => {
     localStorage.removeItem("selectTopic");
     localStorage.setItem("searchTitle", value);
     setCurrentPage(0);
-    setTimeout(() => {
+    if (debounceTimeout) {
+      clearTimeout(debounceTimeout);
+    }
+    const newTimeout = setTimeout(() => {
       handleSearchBookList(value);
     }, 3000);
+
+    setDebounceTimeout(newTimeout);
   };
   const handleTopicSelect = (event) => {
     localStorage.setItem("selectTopic", event);
@@ -81,7 +92,7 @@ const HomeScreen = () => {
       successMessage("Book remove from wishlist!");
     } else {
       updatedWishlist.push(book);
-      successMessage("Book added from wishlist!");
+      successMessage("Book added to wishlist!");
     }
 
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
@@ -134,7 +145,7 @@ const HomeScreen = () => {
           {getBooksList?.loading ? (
             Array(32)
               .fill(0)
-              .map((_, index) => <CardSkeleton key={index} />)
+              .map((item, index) => <CardSkeleton key={index} />)
           ) : getBooksList?.data?.results?.length == 0 ? (
             <div className="py-10">
               <WarningMessage error={"No Data Found"} />
@@ -146,6 +157,7 @@ const HomeScreen = () => {
                 item={item}
                 handleWishlistClick={handleWishlistClick}
                 fillColour={isBookInWishlist(item)}
+                handleBookDetails={handleBookDetails}
               />
             ))
           ) : (
