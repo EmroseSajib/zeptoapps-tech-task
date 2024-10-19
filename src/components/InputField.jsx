@@ -12,7 +12,7 @@ const InputField = ({
   defaultValue = defaultValue,
 }) => {
   return (
-    <div className={`w-[50%] ${containerClassName}`}>
+    <div className={`lg:w-[50%] w-full ${containerClassName}`}>
       <div className="flex rounded-md border-2 border-gray-200 overflow-hidden w-full mx-auto font-[sans-serif]">
         <div className="flex items-center justify-center bg-slate-200 px-5 fill-black">
           {icon}

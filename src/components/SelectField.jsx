@@ -10,7 +10,7 @@ const SelectField = ({
   selectRef,
 }) => {
   return (
-    <div className={`w-[20%] ${containerClassName}`}>
+    <div className={`lg:w-[20%] w-full ${containerClassName}`}>
       <select
         ref={selectRef}
         disabled={disabled}

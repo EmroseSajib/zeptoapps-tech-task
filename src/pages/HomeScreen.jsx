@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CardSkeleton from "../common/CardSkeleton";
-import ErrorValidate from "../common/ErrorValidate";
-import Paginate from "../common/Paginate";
 import { topicArray } from "../common/StoreData";
 import successMessage from "../common/SuccessMessage";
 import useAxios from "../common/UseAxios";
-import WarningMessage from "../common/WarningMessage";
 import CardDesign from "../components/CardDesign";
+import CardSkeleton from "../components/CardSkeleton";
+import ErrorValidate from "../components/ErrorValidate";
 import InputField from "../components/InputField";
+import Paginate from "../components/Paginate";
 import SelectField from "../components/SelectField";
+import WarningMessage from "../components/WarningMessage";
 const HomeScreen = () => {
   const [debounceTimeout, setDebounceTimeout] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
@@ -21,9 +21,11 @@ const HomeScreen = () => {
 
   const selectTopic = localStorage.getItem("selectTopic");
   const searchTitle = localStorage.getItem("searchTitle");
+  //this function navigate another page for book_details
   const handleBookDetails = (bookId) => {
     navigate(`/book-details/${bookId}`);
   };
+  //this function use for pagination purpose
   const handlePagination = (pageNumber) => {
     setCurrentPage(pageNumber?.selected);
     if (selectTopic) {
@@ -34,6 +36,7 @@ const HomeScreen = () => {
       handleBookList(pageNumber?.selected + 1);
     }
   };
+  //this function use for get all books list
   const handleBookList = (selectedPage = 1) => {
     getBooksList.fetcher({
       options: {
@@ -43,6 +46,7 @@ const HomeScreen = () => {
       callback: () => {},
     });
   };
+  //this function is used to retrieve all books based on the search query
   const handleSearchBookList = (value, selectedPage = 1) => {
     getBooksList.fetcher({
       options: {
@@ -52,6 +56,7 @@ const HomeScreen = () => {
       callback: () => {},
     });
   };
+  // This function is used to retrieve all books based on the specifically selected topic.
   const handleTopicBookList = (event, selectedPage = 1) => {
     getBooksList.fetcher({
       options: {
@@ -82,6 +87,7 @@ const HomeScreen = () => {
     setCurrentPage(0);
     handleTopicBookList(event);
   };
+  // This function is used to add or remove books from the wishlist.
 
   const handleWishlistClick = (book) => {
     let updatedWishlist = [...wishlist];
@@ -165,7 +171,7 @@ const HomeScreen = () => {
           )}
         </div>
         {getBooksList?.data?.results?.length > 0 ? (
-          <div className="px-10 items-center justify-between border-t border-blue-gray-50  bg-gray-400">
+          <div className="mx-10 items-center justify-between border-t border-blue-gray-50  bg-gray-400 px-5 rounded-lg my-5">
             <Paginate
               pageable={{
                 totalElements: getBooksList?.data?.count,

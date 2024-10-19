@@ -37,7 +37,6 @@ const useAxios = (initialValue = {}) => {
             error: null,
             data: data,
           }));
-          // if any success message or function dispatch required, we can do this by passing this callback function
           if (typeof callback === "function") {
             return callback(data);
           }

@@ -1,12 +1,9 @@
-import React from "react";
-
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import ReactPaginate from "react-paginate";
 
 const Paginate = ({ pageable = {}, handlePageClick = () => {} }) => {
-  console.log("pageable", pageable);
   return (
-    <div className="flex  justify-between items-center pt-5 ">
+    <div className="flex  justify-between items-center py-3 ">
       {pageable?.totalPages && (
         <div className="">
           <ReactPaginate

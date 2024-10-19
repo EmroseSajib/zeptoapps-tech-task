@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import successMessage from "../common/SuccessMessage";
-import WarningMessage from "../common/WarningMessage";
 import CardDesign from "../components/CardDesign";
+import WarningMessage from "../components/WarningMessage";
 
 const WishListScreen = () => {
   const [getWishList, setWishList] = useState([]);
@@ -10,6 +10,7 @@ const WishListScreen = () => {
   const handleBookDetails = (bookId) => {
     navigate(`/book-details/${bookId}`);
   };
+  // This function is used to  remove books from the wishlist.
 
   const handleWishlistClick = (book) => {
     const updatedBooks = getWishList?.filter((item) => item?.id !== book?.id);

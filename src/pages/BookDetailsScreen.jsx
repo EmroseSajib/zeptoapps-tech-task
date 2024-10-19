@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { IoCloudDownloadOutline } from "react-icons/io5";
 import { useParams } from "react-router-dom";
 import demoImage from "../../public/assets/demoCover.png";
-import ErrorValidate from "../common/ErrorValidate";
 import useAxios from "../common/UseAxios";
+import ErrorValidate from "../components/ErrorValidate";
 
 const BookDetailsScreen = () => {
   const { bookId } = useParams();
@@ -36,7 +36,7 @@ const BookDetailsScreen = () => {
         </div>
       ) : getBookDetailsInfo?.data ? (
         <>
-          <div className="p-10 flex gap-5 ">
+          <div className="p-10 lg:flex gap-5 ">
             <div>
               <img
                 src={
@@ -57,7 +57,7 @@ const BookDetailsScreen = () => {
                   {author?.name}
                 </p>
               ))}
-              <div className="flex  gap-2">
+              <div className="flex flex-wrap gap-2">
                 {browsingData(getBookDetailsInfo?.data?.bookshelves)?.map(
                   (browsingItem, index) => (
                     <span

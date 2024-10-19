@@ -10,6 +10,7 @@ function App() {
   return (
     <Router>
       <ToastContainer />
+      {/* this navbar common for all components */}
       <Navbar />
       <Routes>
         <Route path="/" element={<HomeScreen />} />

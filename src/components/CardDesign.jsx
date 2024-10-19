@@ -57,7 +57,7 @@ const CardDesign = ({
             <button
               type="button"
               onClick={() => handleBookDetails(item?.id)}
-              className="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-1 text-center me-2 mb-2"
+              className="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 rounded-lg text-sm px-2 py-[1px] font-semibold text-center me-2 mb-2"
             >
               Details
             </button>
