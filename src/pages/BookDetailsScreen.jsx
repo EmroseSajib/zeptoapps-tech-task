@@ -48,7 +48,7 @@ const BookDetailsScreen = () => {
                 className="max-w-150 max-h-150 min-h-150 my-6"
               />
             </div>
-            <div className="">
+            <div>
               <h3 className="text-3xl text-gray-800 font-bold flex-1 truncate whitespace-nowrap overflow-hidden text-ellipsis">
                 {getBookDetailsInfo?.data?.title}
               </h3>
